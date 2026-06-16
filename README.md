@@ -1,234 +1,276 @@
-# AI 项目模板 / AI Project Template
+# AutoTest Hub
 
-🤖 一个通用的 AI 辅助开发项目起点 / A universal template for AI-assisted development
+单人自动化测试管理系统 - 专为独立测试工程师和小型团队设计的本地化测试管理平台。
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+## 项目概述
 
----
+AutoTest Hub 是一个轻量级的自动化测试管理平台，旨在帮助测试工程师高效管理测试用例、元素、执行和报告。系统采用前后端分离架构，支持 Web 和 App 自动化测试。
 
-## 🚀 快速开始 / Quick Start
+### 核心特性
 
-### 方式一：使用 Makefile（推荐）
+- **用例编排**: 支持可视化用例编辑、步骤管理、流程控制
+- **元素管理**: 多定位符管理、元素健康巡检、失效预警
+- **执行引擎**: 基于 Playwright 的自动化执行，支持多浏览器
+- **测试报告**: 详细的执行报告、趋势统计、失败分析
+- **AI 诊断**: 智能失败分析、修复建议（可选）
+- **环境管理**: 驱动检测、浏览器管理、设备管理
 
-```bash
-# 1. 克隆模板 / Clone template
-git clone https://github.com/MagicSquarekey/AI-XiangMuMoBan.git
-cd AI-XiangMuMoBan
+## 技术栈
 
-# 2. 创建新项目 / Create new project
-make new-project
+### 后端
+- **框架**: FastAPI
+- **数据库**: SQLite (aiosqlite)
+- **ORM**: SQLAlchemy 2.0 (async)
+- **测试引擎**: Playwright
 
-# 3. 按提示输入项目名称，然后进入项目
-cd 我的项目名
-make setup
-```
+### 前端
+- **框架**: Vue 3 + TypeScript
+- **UI 组件**: Element Plus
+- **构建工具**: Vite
+- **状态管理**: Pinia
+- **HTTP 客户端**: Axios
 
-### 方式二：使用 Python 脚本
+## 快速开始
 
-```bash
-# 1. 克隆模板 / Clone template
-git clone https://github.com/MagicSquarekey/AI-XiangMuMoBan.git
-cd AI-XiangMuMoBan
+### 环境要求
 
-# 2. 创建新项目 / Create new project
-python utils/create_project.py 我的项目名
+- Python 3.10+
+- Node.js 18+
+- npm 或 pnpm
 
-# 3. 进入项目 / Enter project
-cd 我的项目名
-make setup
-```
+### 安装步骤
 
----
-
-## 📁 目录结构 / Directory Structure
-
-```
-AI-XiangMuMoBan/
-├── .claude/             # Claude 配置（自动生效）
-│   ├── commands/        # 快捷命令
-│   └── skills/          # 技能定义
-├── config/              # 项目配置
-│   └── settings.yaml    # 通用设置
-├── utils/               # 工具脚本
-│   ├── create_project.py    # 创建新项目
-│   └── update_directory.py  # 更新目录结构
-├── templates/           # 模板文件
-├── docs/                # 文档
-├── private/             # 🔒 私有部分（不上传到 GitHub）
-│   └── (项目特定文件)
-├── README.md            # 项目说明（本文件）
-├── CLAUDE.md            # AI 指令
-├── Makefile             # 常用命令
-├── requirements.txt     # Python 依赖
-└── .gitignore           # Git 忽略规则
-```
-
----
-
-## 🔧 Makefile 使用教程
-
-Makefile 是一个命令行工具，可以让你用简单的命令执行复杂的操作。
-
-### 常用命令
-
-| 命令 | 说明 | 使用场景 |
-|------|------|----------|
-| `make help` | 显示所有可用命令 | 不知道有什么命令时 |
-| `make setup` | 初始化项目 | 首次进入项目时 |
-| `make clean` | 清理临时文件 | 项目变慢或有垃圾文件时 |
-| `make new-project` | 创建新项目 | 需要新建项目时 |
-
-### 使用步骤
-
-#### 1. 首次进入项目
+#### 1. 克隆项目
 
 ```bash
-cd 我的项目名
-make setup
+git clone <repository-url>
+cd AutoTestHub
 ```
 
-这会：
-- 安装 Python 依赖（requirements.txt）
-- 显示"项目初始化完成！"
-
-#### 2. 查看可用命令
+#### 2. 后端设置
 
 ```bash
-make help
+# 创建虚拟环境
+python -m venv venv
+
+# 激活虚拟环境
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 初始化数据库
+python -m backend.init_db
+
+# 启动后端服务
+python -m backend.main
 ```
 
-会显示：
-```
-可用命令：
-clean           清理临时文件
-help            显示帮助信息
-new-project     创建新项目
-setup           初始化项目
-```
+后端服务将在 http://localhost:8000 启动
 
-#### 3. 清理项目
+#### 3. 前端设置
 
 ```bash
-make clean
+# 进入前端目录
+cd frontend
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
 ```
 
-会删除：
-- `__pycache__/` 目录
-- `.pytest_cache/` 目录
-- `htmlcov/` 目录
-- `.coverage` 文件
-- `reports/` 目录
+前端应用将在 http://localhost:5173 启动
 
-#### 4. 创建新项目
+#### 4. 访问应用
+
+打开浏览器访问 http://localhost:5173
+
+## 项目结构
+
+```
+AutoTestHub/
+├── backend/                    # 后端代码
+│   ├── api/                   # API 路由
+│   │   ├── __init__.py
+│   │   ├── testcases.py      # 用例管理 API
+│   │   ├── elements.py       # 元素管理 API
+│   │   ├── execution.py      # 执行引擎 API
+│   │   ├── reports.py        # 测试报告 API
+│   │   ├── environment.py    # 环境管理 API
+│   │   └── ai_diagnosis.py   # AI 诊断 API
+│   ├── models/                # 数据库模型
+│   │   ├── __init__.py
+│   │   ├── base.py           # 基础模型
+│   │   ├── testcase.py       # 用例模型
+│   │   ├── element.py        # 元素模型
+│   │   ├── execution.py      # 执行模型
+│   │   └── report.py         # 报告模型
+│   ├── schemas/               # Pydantic 模式
+│   │   ├── __init__.py
+│   │   ├── testcase.py
+│   │   ├── element.py
+│   │   ├── execution.py
+│   │   └── report.py
+│   ├── core/                  # 核心功能
+│   │   ├── __init__.py
+│   │   ├── database.py       # 数据库连接
+│   │   └── security.py       # 安全配置
+│   ├── main.py                # 应用入口
+│   └── init_db.py             # 数据库初始化
+├── frontend/                  # 前端代码
+│   ├── src/
+│   │   ├── api/              # API 调用
+│   │   ├── assets/           # 静态资源
+│   │   ├── components/       # 公共组件
+│   │   ├── layouts/          # 布局组件
+│   │   ├── router/           # 路由配置
+│   │   ├── stores/           # 状态管理
+│   │   ├── styles/           # 样式文件
+│   │   ├── utils/            # 工具函数
+│   │   └── views/            # 页面视图
+│   │       ├── dashboard/    # 仪表盘
+│   │       ├── testcases/    # 用例管理
+│   │       ├── elements/     # 元素管理
+│   │       ├── execution/    # 测试执行
+│   │       ├── reports/      # 测试报告
+│   │       └── environment/  # 环境管理
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.ts
+├── config/                    # 配置文件
+│   ├── __init__.py
+│   └── settings.py           # 应用配置
+├── data/                      # 数据目录
+│   ├── autotest.db           # SQLite 数据库
+│   ├── screenshots/          # 截图存储
+│   ├── reports/              # 报告存储
+│   └── logs/                 # 日志目录
+├── .env.example               # 环境变量示例
+├── .gitignore
+├── requirements.txt
+└── README.md
+```
+
+## 配置说明
+
+### 环境变量
+
+复制 `.env.example` 为 `.env` 并配置以下变量：
 
 ```bash
-make new-project
+# 数据库配置
+DATABASE_URL=sqlite+aiosqlite:///./data/autotest.db
+
+# 服务器配置
+BACKEND_PORT=8000
+FRONTEND_PORT=5173
+DEBUG=true
+
+# AI 配置（可选）
+AI_API_KEY=your_api_key_here
+AI_API_URL=https://api.example.com
+
+# 通知配置（可选）
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=your_email@example.com
+SMTP_PASSWORD=your_password
 ```
 
-会启动项目创建向导，按提示输入项目名称即可。
+## 使用指南
 
-### 常见问题
+### 1. 创建测试用例
 
-**Q: 提示 "make: command not found" 怎么办？**
+1. 进入「用例管理」页面
+2. 点击「新建用例」按钮
+3. 填写用例基本信息（名称、模块、优先级等）
+4. 添加测试步骤（选择关键字、配置参数）
+5. 保存用例
 
-A: Windows 用户需要安装 Make：
-- 方法1：使用 Git Bash（自带 make）
-- 方法2：使用 `python utils/create_project.py` 代替
+### 2. 管理元素
 
-**Q: 提示 "No rule to make target 'xxx'" 怎么办？**
+1. 进入「元素管理」页面
+2. 点击「新建元素」按钮
+3. 填写元素信息（名称、所属页面）
+4. 配置定位符（支持 XPath、CSS、ID、Name 等多种方式）
+5. 保存元素
 
-A: 说明命令不存在，运行 `make help` 查看可用命令。
+### 3. 执行测试
 
-**Q: 可以自定义 Makefile 命令吗？**
+1. 进入「测试执行」页面
+2. 选择要执行的用例
+3. 配置执行参数（浏览器、运行模式等）
+4. 点击「开始执行」
+5. 查看执行进度和结果
 
-A: 可以！编辑 Makefile 文件，按照格式添加：
-```makefile
-my-command: ## 我的命令说明
-    要执行的命令
-```
+### 4. 查看报告
 
----
+1. 进入「测试报告」页面
+2. 查看报告列表和统计信息
+3. 点击报告查看详细内容
+4. 可导出报告为 HTML 格式
 
-## 🎯 快捷命令 / Quick Commands
+## 开发指南
 
-在 Claude Code 中使用这些命令：
+### 添加新的 API 接口
 
-| 命令 | 用途 | Command |
-|------|------|---------|
-| `/plan` | 任务规划 | Task planning |
-| `/review` | 代码审查 | Code review |
-| `/fix` | 修复问题 | Bug fixing |
-| `/commit` | 提交代码 | Smart commit |
-| `/docs` | 文档同步 | Document sync |
-| `/status` | 查看状态 | Project status |
+1. 在 `backend/models/` 中定义数据库模型
+2. 在 `backend/schemas/` 中定义 Pydantic 模式
+3. 在 `backend/api/` 中创建路由
+4. 在 `backend/main.py` 中注册路由
 
----
+### 添加新的前端页面
 
-## 📖 使用方法 / Usage
+1. 在 `frontend/src/views/` 中创建页面组件
+2. 在 `frontend/src/router/index.ts` 中添加路由
+3. 在 `frontend/src/api/` 中添加 API 调用
 
-### 创建新项目
+### 数据库迁移
 
 ```bash
-# 方式1：使用 Makefile
-make new-project
+# 生成迁移脚本
+alembic revision --autogenerate -m "description"
 
-# 方式2：使用 Python
-python utils/create_project.py 项目名称
+# 执行迁移
+alembic upgrade head
 ```
 
-### 开始开发
+## 常见问题
+
+### Q: 如何重置数据库？
+
+A: 删除 `data/autotest.db` 文件，然后重新运行初始化脚本：
 
 ```bash
-cd 项目名称
-make setup
-
-# 开始使用 Claude Code 开发
-# 输入 /plan 开始任务规划
+python -m backend.init_db
 ```
 
-### 私有文件管理
+### Q: 如何配置 AI 诊断功能？
 
-将不想上传到 GitHub 的文件放在 `private/` 目录：
+A: 在 `.env` 文件中配置 AI 相关的环境变量：
 
 ```bash
-# 例如：项目文档、笔记、敏感配置等
-private/
-├── docs/           # 项目文档
-├── notes/          # 个人笔记
-└── secrets.yaml    # 敏感配置
+AI_API_KEY=your_api_key_here
+AI_API_URL=https://api.example.com
 ```
 
----
+### Q: 如何添加新的浏览器支持？
 
-## 🔒 安全规范 / Security
+A: 在 `backend/api/environment.py` 中的 `get_browsers()` 函数中添加新的浏览器配置。
 
-### 绝对禁止 / Never Do
-
-- ❌ 不得提交 API Key、密码、密钥
-- ❌ 不得提交 .env 文件
-- ❌ 不得在代码中硬编码任何凭证
-
-### 发现安全问题时 / When发现安全问题
-
-1. 立即停止提交
-2. 告知用户
-3. 清理 Git 历史（如已提交）
-
----
-
-## 📚 更多信息 / More Info
-
-- [CLAUDE.md](CLAUDE.md) - AI 指令 / AI Instructions
-- [docs/shi_yong_shou_ce.md](docs/shi_yong_shou_ce.md) - 使用手册 / User Manual
-
----
-
-## 📄 许可证 / License
+## 许可证
 
 MIT License
 
+## 联系方式
+
+如有问题或建议，请提交 Issue 或联系开发团队。
+
 ---
 
-*最后更新 / Last Updated: 2026-06-16*
-*维护者 / Maintainer: AI 协作开发团队*
+**AutoTest Hub** - 让自动化测试更简单、更高效！
